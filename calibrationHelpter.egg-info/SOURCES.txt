@@ -1,7 +1,0 @@
-README.md
-setup.py
-calibrationHelper/intrinsic_extrinsic.py
-calibrationHelpter.egg-info/PKG-INFO
-calibrationHelpter.egg-info/SOURCES.txt
-calibrationHelpter.egg-info/dependency_links.txt
-calibrationHelpter.egg-info/top_level.txt

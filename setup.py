@@ -2,9 +2,9 @@ from distutils.core import setup
 
 
 setup(
-    name="calibrationHelpter",
+    name="calibrationLoader",
     version="0.1",
-    packages=['calibrationHelper'],
+    packages=['calibrationLoader'],
     author="Mitchell Scott",
     author_email="miscott@uw.edu",
     description="Codebase to help store and load cv2 calibration values",
