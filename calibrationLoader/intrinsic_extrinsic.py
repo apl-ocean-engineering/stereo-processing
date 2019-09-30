@@ -7,6 +7,7 @@
 import numpy as np
 import cv2
 import ampProc.amp_common as amp_common
+import yaml
 
 
 class Loader:
@@ -34,14 +35,20 @@ class Loader:
     R1 = [False, " "]
     R2 = [False, " "]
 
-    def __init__(self, base_path):
+    def __init__(self, base_path=" "):
         """
         Arg calibration loader: Loaded calibration.yaml file
         """
         self.parms = dict()
         self.base_path = base_path
 
-    def load_params_from_file(self, calibration_loader):
+    def load_params_from_file(self, calibration_yaml):
+        with open(calibration_yaml, 'r') as stream:
+            calibration_loader = yaml.safe_load(stream)
+
+        self._load_params_from_file(calibration_loader)
+
+    def _load_params_from_file(self, calibration_loader):
         self.parms["base_path"] = self.base_path
         self.parms["K1"] = self.K1
         self.parms["K2"] = self.K2
