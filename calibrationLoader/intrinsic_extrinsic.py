@@ -6,7 +6,6 @@
 """
 import numpy as np
 import cv2
-import ampProc.amp_common as amp_common
 import yaml
 
 
@@ -159,7 +158,10 @@ class ExtrinsicIntrnsicLoaderSaver:
             paramater: np.ndarry type to save
             save_name: full save path
         """
-        amp_common.save_np_array(save_name, paramater)
+        self._save_np_array(save_name, paramater)
+
+    def _save_np_array(save_name, mat):
+        np.savetxt(save_name, mat, fmt="%1.3f", delimiter=",")
 
     def _load_params(self, paramLoader):
         """
