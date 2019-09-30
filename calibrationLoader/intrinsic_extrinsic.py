@@ -34,11 +34,12 @@ class Loader:
     R1 = [False, " "]
     R2 = [False, " "]
 
-    def __init__(self):
+    def __init__(self, base_path):
         """
         Arg calibration loader: Loaded calibration.yaml file
         """
         self.parms = dict()
+        self.base_path = base_path
 
     def load_params_from_file(self, calibration_loader):
         self.parms["base_path"] = self.base_path
@@ -57,7 +58,6 @@ class Loader:
         self._set_params()
 
     def _set_params(self):
-        self.base_path = self.parms["base_path"]
         self._set_path(self.K1, self.parms["K1"])
         self._set_path(self.K2, self.parms["K2"])
         self._set_path(self.d1, self.parms["d1"])
