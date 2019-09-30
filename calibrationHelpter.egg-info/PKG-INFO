@@ -1,0 +1,11 @@
+Metadata-Version: 1.0
+Name: calibrationHelpter
+Version: 0.1
+Summary: Codebase to help store and load cv2 calibration values
+Home-page: UNKNOWN
+Author: Mitchell Scott
+Author-email: miscott@uw.edu
+License: UNKNOWN
+Description: # calibration_helper
+        
+Platform: UNKNOWN
