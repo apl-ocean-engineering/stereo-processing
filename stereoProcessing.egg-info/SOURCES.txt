@@ -1,8 +1,0 @@
-README.md
-setup.py
-stereoProcessing/__init__.py
-stereoProcessing/intrinsic_extrinsic.py
-stereoProcessing.egg-info/PKG-INFO
-stereoProcessing.egg-info/SOURCES.txt
-stereoProcessing.egg-info/dependency_links.txt
-stereoProcessing.egg-info/top_level.txt
