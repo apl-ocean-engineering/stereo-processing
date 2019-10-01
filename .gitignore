@@ -1,2 +1,4 @@
 stereoProcessing.egg-info
 stereoProcessing/__pycache__/
+scripts/*.pyc
+stereoProcessing/*.pyc
