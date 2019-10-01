@@ -1,4 +1,4 @@
-# calibration_helper
+# stereoProcessing
 Helper package for loading, saving, and storing of calbiration vlaues for cv2 impage processing. 
 
 I've started using [this](https://github.com/apl-ocean-engineering/stereo-calibration) and [ROS calibration](http://wiki.ros.org/camera_calibration) for camera calibration. This package is meant to 1) convert from those stored calibration values to individual .csv's for opencv usage, and 2) easily load and store values in a helper class for useage across common applications (namely [amp-proc](https://github.com/apl-ocean-engineering/amp-proc) and serdp_calibration (

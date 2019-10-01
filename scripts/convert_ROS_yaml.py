@@ -8,6 +8,7 @@
 import yaml
 import argparse
 import numpy as np
+import serdpCalibrator.point_identification3
 
 
 def save(param, name):
