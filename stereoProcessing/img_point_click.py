@@ -53,6 +53,10 @@ class PointClick(object):
         cv2.setMouseCallback(Constants.img1_name, self._mouse_click1)
         cv2.setMouseCallback(Constants.img2_name, self._mouse_click2)
 
+    def display_single_point(self, img):
+        self.img1 = img
+        cv2.imshow(Constants.img1_name, self.img1)
+
     def corresponding_image_points(self, img1, img2):
         """
         Determine coressponding image points between the frames
@@ -126,7 +130,7 @@ class PointClick(object):
             self.x1_points.append(x)
             self.y1_points.append(y)
             # Draw circle where clicked
-            cv2.circle(self.img1, (x, y), 7, (255, 0, 0), -1)
+            cv2.circle(self.img1, (x, y), 2, (255, 0, 0), -1)
             cv2.imshow(Constants.img1_name, self.img1)
 
     def _mouse_click2(self, event, x, y, flags, param):
@@ -139,5 +143,5 @@ class PointClick(object):
             self.x2_points.append(x)
             self.y2_points.append(y)
             # Draw circle where clicked
-            cv2.circle(self.img2, (x, y), 7, (255, 0, 0), -1)
+            cv2.circle(self.img2, (x, y), 2, (255, 0, 0), -1)
             cv2.imshow(Constants.img2_name, self.img2)

@@ -8,7 +8,6 @@
 import yaml
 import argparse
 import numpy as np
-import serdpCalibrator.point_identification3
 
 
 def save(param, name):
@@ -41,6 +40,7 @@ def main(args):
     P = np.asarray(
         calibration_loader["projection_matrix"]["data"]).reshape((3, 4))
 
+    save(im_size, save_path + "/im_size.csv")
     if args.camera_name == "left_camera":
         save(K, save_path + args.camera_name + "/intrinsic_matrix.csv")
         save(d, save_path + args.camera_name + "/distortion_coeffs.csv")
@@ -60,7 +60,7 @@ if __name__ == "__main__":
     parser.add_argument("save_path", help="Save folder for values")
     parser.add_argument(
         "--camera_name",
-        help="Save name for camera (defulat left)", default="left")
+        help="Save name for camera (defulat left)", default="left_camera")
 
     args = parser.parse_args()
     main(args)

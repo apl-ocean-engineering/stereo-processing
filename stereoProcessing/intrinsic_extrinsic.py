@@ -20,6 +20,7 @@ class Loader:
     """
     base_path = " "
     # Intrnsic paramaters and distortion
+    im_size = [False, " "]
     K1 = [False, " "]
     K2 = [False, " "]
     d1 = [False, " "]
@@ -30,7 +31,7 @@ class Loader:
     # Projection matrices
     P1 = [False, " "]
     P2 = [False, " "]
-    #Rectification matricies
+    # Rectification matricies
     R1 = [False, " "]
     R2 = [False, " "]
 
@@ -49,6 +50,7 @@ class Loader:
 
     def _load_params_from_file(self, calibration_loader):
         self.parms["base_path"] = self.base_path
+        self.parms["im_size"] = self.im_size
         self.parms["K1"] = self.K1
         self.parms["K2"] = self.K2
         self.parms["d1"] = self.d1
@@ -64,6 +66,7 @@ class Loader:
         self._set_params()
 
     def _set_params(self):
+        self._set_path(self.im_size, self.parms["im_size"])
         self._set_path(self.K1, self.parms["K1"])
         self._set_path(self.K2, self.parms["K2"])
         self._set_path(self.d1, self.parms["d1"])
@@ -106,24 +109,26 @@ class Paramters:
     R2 = None
 
 
-
 class ExtrinsicIntrnsicLoaderSaver:
     """
     Helper class to load and calculate projection matricies
     Attributes:
         paramters: Object containing camera paramaters
     Methods:
-        calculate_projection_matracies: Calculate projection matrices and update
-        paramters
+        calculate_projection_matracies: Calculate projection matrices and
+        update paramters
     """
-    def __init__(self, paramLoader, im_size):
+
+    def __init__(self, paramLoader):
         """
         Input:
             paramLoader: Dictonary of calibration matricies
         """
         self.paramaters = Paramters
-        self.paramaters.im_size = im_size
         self._load_params(paramLoader)
+
+    def set_imsize(self, im_size):
+        self.paramaters.im_size = im_size
 
     def calculate_rectification_matracies(self):
         R1, R2, P1, P2, Q, validPixROI1, validPixROI2 = cv2.stereoRectify(
@@ -167,10 +172,12 @@ class ExtrinsicIntrnsicLoaderSaver:
         """
         Set paramters to paramLoader
         """
+        if paramLoader.im_size[0]:
+            self.paramaters.im_size = np.float64(np.loadtxt(
+                paramLoader.im_size[1], delimiter=','))
         if paramLoader.K1[0]:
             self.paramaters.K1 = np.float64(np.loadtxt(
                 paramLoader.K1[1], delimiter=','))
-            print(self.paramaters.K1)
         if paramLoader.K2[0]:
             self.paramaters.K2 = np.float64(np.loadtxt(
                 paramLoader.K2[1], delimiter=','))
