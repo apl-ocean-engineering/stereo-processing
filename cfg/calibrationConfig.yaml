@@ -1,3 +1,4 @@
+im_size: [True, im_size.csv]
 K1: [True, camera1/intrinsic_matrix.csv]
 K2: [True, camera2/intrinsic_matrix.csv]
 d1: [True, camera1/distortion_coeffs.csv]
