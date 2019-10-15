@@ -17,8 +17,8 @@ def save(param, name):
         paramater: np.ndarry type to save
         save_name: full save path
     """
-    print(name)
-    np.savetxt(name, param, fmt="%1.3f", delimiter=",")
+    print(param)
+    np.savetxt(name, param, fmt="%1.8f", delimiter=",")
 
 
 def main(args):
