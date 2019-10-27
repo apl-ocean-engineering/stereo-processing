@@ -8,6 +8,7 @@
 """
 from img_point_click import PointClick
 import cv2
+import numpy as np
 
 
 class PointIdentification3D:
@@ -35,7 +36,7 @@ class PointIdentification3D:
         """
         self.pc.corresponding_image_points(img1, img2)
         points1, points2 = self.pc.get_points()
-        # print(self.params.P1, self.params.P2)
+
         points1_ = cv2.undistortPoints(
             points1, self.params.K1,
             self.params.d1, R = self.params.R1, P = self.params.P1)
@@ -47,5 +48,4 @@ class PointIdentification3D:
 
         points4d = cv2.triangulatePoints(self.params.P1, self.params.P2,
                                                         points1_, points2_)
-
         return points4d
