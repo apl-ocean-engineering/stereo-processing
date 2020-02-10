@@ -47,6 +47,9 @@ class PointClick(object):
         self.img1 = np.zeros((3, 3))
         self.img2 = np.zeros((3, 3))
 
+        self.left_click_count = 0
+        self.right_click_count = 0
+
         cv2.namedWindow(Constants.img1_name, cv2.WINDOW_NORMAL)
         cv2.namedWindow(Constants.img2_name, cv2.WINDOW_NORMAL)
         # Define mouse callback functions
@@ -76,7 +79,7 @@ class PointClick(object):
         cv2.imshow(Constants.img1_name, self.img1)
         cv2.imshow(Constants.img2_name, self.img2)
         k = 0
-        while k != 13: #enter
+        while k != ord('\n') and k != ord('\r'): #enter
             k = cv2.waitKey(0)
             if k == 113: #q
                 cv2.destroyAllWindows()
@@ -105,17 +108,18 @@ class PointClick(object):
         if len(self.x1_points) != len(self.x2_points):
             raise AttributeError("Unequal Points Clicked")
         # Organize points
-        pnts1 = np.array([[self.x1_points[0]], [self.y1_points[0]]])
-        pnts2 = np.array([[self.x2_points[0]], [self.y2_points[0]]])
+        pnts1 = np.array([[[self.x1_points[0], self.y1_points[0]]]])
+        pnts2 = np.array([[[self.x2_points[0], self.y2_points[0]]]])
         for i in range(1, len(self.x1_points)):
             pnts1 = np.concatenate((pnts1,
-                [[self.x1_points[i]], [self.y1_points[i]]]), axis=1)
+                [[[self.x1_points[i], self.y1_points[i]]]]), axis=1)
             pnts2 = np.concatenate((pnts2,
-                [[self.x2_points[i]], [self.y2_points[i]]]), axis=1)
+                [[[self.x2_points[i], self.y2_points[i]]]]), axis=1)
 
         # Must be float 64s to work in OpenCV
         pnts1 = np.float64(pnts1)
         pnts2 = np.float64(pnts2)
+
 
         return pnts1, pnts2
 
@@ -129,8 +133,12 @@ class PointClick(object):
         if event == cv2.EVENT_LBUTTONDOWN:
             self.x1_points.append(x)
             self.y1_points.append(y)
+            self.left_click_count+=1
+            color = (255,0,0)
             # Draw circle where clicked
-            cv2.circle(self.img1, (x, y), 2, (255, 0, 0), -1)
+            cv2.circle(self.img1, (x, y), 7, color, -1)
+            cv2.putText(self.img1, "Click"+str(self.left_click_count),
+            (x+10,y+10), cv2.FONT_HERSHEY_SIMPLEX, 1, color, 2)
             cv2.imshow(Constants.img1_name, self.img1)
 
     def _mouse_click2(self, event, x, y, flags, param):
@@ -143,5 +151,10 @@ class PointClick(object):
             self.x2_points.append(x)
             self.y2_points.append(y)
             # Draw circle where clicked
-            cv2.circle(self.img2, (x, y), 2, (255, 0, 0), -1)
+            self.right_click_count+=1
+            color = (255,0,0)
+            # Draw circle where clicked
+            cv2.circle(self.img2, (x, y), 7, color, -1)
+            cv2.putText(self.img2, "Click"+str(self.right_click_count),
+            (x+10,y+10), cv2.FONT_HERSHEY_SIMPLEX, 1, color, 2)
             cv2.imshow(Constants.img2_name, self.img2)
