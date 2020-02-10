@@ -62,6 +62,7 @@ class Loader:
         self.parms["R1"] = self.R1
         self.parms["R2"] = self.R2
         for key in calibration_loader.keys():
+
             self.parms[key] = calibration_loader[key]
         self._set_params()
 
@@ -178,6 +179,7 @@ class ExtrinsicIntrnsicLoaderSaver:
         if paramLoader.K1[0]:
             self.paramaters.K1 = np.float64(np.loadtxt(
                 paramLoader.K1[1], delimiter=','))
+
         if paramLoader.K2[0]:
             self.paramaters.K2 = np.float64(np.loadtxt(
                 paramLoader.K2[1], delimiter=','))
@@ -194,6 +196,7 @@ class ExtrinsicIntrnsicLoaderSaver:
             self.paramaters.t = np.float64(np.loadtxt(
                 paramLoader.t[1], delimiter=','))
         if paramLoader.P1[0]:
+
             self.paramaters.P1 = np.float64(np.loadtxt(
                 paramLoader.P1[1], delimiter=','))
         if paramLoader.P2[0]:
